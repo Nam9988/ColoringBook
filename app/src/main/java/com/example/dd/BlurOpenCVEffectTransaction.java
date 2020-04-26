@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
+import java.security.MessageDigest;
+
+import androidx.annotation.NonNull;
+
 /**
  * Copyright © 2016 FStyleVN
  * Created by Sun on 23/10/2016.
@@ -13,7 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 public class BlurOpenCVEffectTransaction extends BitmapTransformation {
     public BlurOpenCVEffectTransaction(Context context) {
-        super(context);
+        super();
     }
 
     @Override
@@ -23,8 +27,13 @@ public class BlurOpenCVEffectTransaction extends BitmapTransformation {
         return bmp;
     }
 
+//    @Override
+//    public String getId() {
+//        return "blur OpenCV";
+//    }
+
     @Override
-    public String getId() {
-        return "blur OpenCV";
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+
     }
 }

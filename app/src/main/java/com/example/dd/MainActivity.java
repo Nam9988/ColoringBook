@@ -3,34 +3,28 @@ package com.example.dd;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.signature.StringSignature;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Hashtable;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ColorAdapter.OnColorSelected {
 
@@ -53,8 +47,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mImgRootPhoto = (ImageView) findViewById(R.id.img_root_photo);
-        mImgResultPhoto = (ImageView) findViewById(R.id.img_result_photo);
+//        mImgRootPhoto = (ImageView) findViewById(R.id.img_root_photo);
+//        mImgResultPhoto = (ImageView) findViewById(R.id.img_result_photo);
+        paintView = findViewById(R.id.paint_view);
+        imgBackground = findViewById(R.id.img_background);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        paintView.init(metrics);
+        paintView.normal();
+        init();
+        initRecyclerView();
     }
 
     public void onClickSelectPhoto(View view) {
@@ -144,27 +146,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             results = new Uri[]{Uri.fromFile(new File(imagePath))};
         }
         // Fill root photo into image view
+        paintView.clear();
         Glide.with(this)
                 .load(results[0])
-                .signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                .into(mImgRootPhoto);
+                .into(imgBackground);
         // Fill effect photo into image view
-        Glide.with(this)
-                .load(results[0])
-                .signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                .transform(new BlurOpenCVEffectTransaction(this))
-                .into(mImgResultPhoto);
-        paintView = findViewById(R.id.paint_view);
-        imgBackground = findViewById(R.id.img_background);
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        paintView.init(metrics);
-        paintView.normal();
-        init();
-        initRecyclerView();
+//        Glide.with(this)
+//                .load(results[0])
+//                .transform(new BlurOpenCVEffectTransaction(this))
+//                .into(imgBackground);
     }
 
-    private void getColors(){
+    private void getColors() {
         colors = new ArrayList<>();
         colors.add(Color.BLUE);
         colors.add(Color.GRAY);
@@ -185,11 +178,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnUndo.setOnClickListener(this);
         rvColor = findViewById(R.id.rv_color);
     }
-    private void initRecyclerView(){
+
+    private void initRecyclerView() {
         getColors();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rvColor.setLayoutManager(llm);
-        rvColor.setAdapter(new ColorAdapter(this, colors,this));
+        rvColor.setAdapter(new ColorAdapter(this, colors, this));
     }
 
     @Override
@@ -198,20 +192,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_paint:
                 break;
             case R.id.btn_clear:
-                Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
-                paintView.setColorPaint(Color.WHITE);
-                DisplayMetrics metrics = new DisplayMetrics();
-                paintView.init(metrics);
+                paintView.clear();
                 break;
             case R.id.btn_undo:
-                paintView.clear();
+                paintView.undo();
                 break;
         }
     }
 
     @Override
     public void onSelected(int color) {
-
+        paintView.setColorPaint(color);
     }
 
 //    @Override

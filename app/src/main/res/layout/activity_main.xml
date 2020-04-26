@@ -17,6 +17,7 @@
             android:src="@drawable/ic_photo"
             android:layout_centerHorizontal="true"
             android:id="@+id/img_select_photo"
+            android:onClick="onClickSelectPhoto"
             android:layout_width="40dp"
             android:layout_height="40dp"/>
         <androidx.recyclerview.widget.RecyclerView

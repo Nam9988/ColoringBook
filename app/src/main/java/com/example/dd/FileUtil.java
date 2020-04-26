@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.BufferedOutputStream;
@@ -20,6 +19,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
+
+import androidx.annotation.NonNull;
 
 public class FileUtil {
 

@@ -13,11 +13,10 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import androidx.annotation.Nullable;
 
 public class PaintView extends View {
 
@@ -29,6 +28,7 @@ public class PaintView extends View {
     private Path mPath;
     private Paint mPaint;
     private ArrayList<FingerPath> paths = new ArrayList<>();
+    private ArrayList<FingerPath> undoPaths = new ArrayList<>();
     private int currentColor;
     private int backgroundColor = DEFAULT_BG_COLOR;
     private int strokeWidth;
@@ -39,6 +39,8 @@ public class PaintView extends View {
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+    private DisplayMetrics displayMetrics;
+
     public PaintView(Context context) {
         super(context);
     }
@@ -63,11 +65,12 @@ public class PaintView extends View {
         mPaint.setXfermode(null);
         mPaint.setAlpha(0xff);
 
-        mEmboss = new EmbossMaskFilter(new float[] {1, 1, 1}, 0.4f, 6, 3.5f);
+        mEmboss = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.4f, 6, 3.5f);
         mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
     }
 
     public void init(DisplayMetrics metrics) {
+        displayMetrics = metrics;
         int height = metrics.heightPixels;
         int width = metrics.widthPixels;
 
@@ -95,15 +98,31 @@ public class PaintView extends View {
 
     public void clear() {
         backgroundColor = DEFAULT_BG_COLOR;
+        mBitmap.eraseColor(Color.TRANSPARENT);
         paths.clear();
+        undoPaths.clear();
         normal();
+        invalidate();
+    }
+
+    public void undo() {
+        if (paths.size() > 0) {
+            clearDraw();
+            undoPaths.add(paths.remove(paths.size() - 1));
+            invalidate();
+        }
+    }
+
+    private void clearDraw() {
+        mBitmap = Bitmap.createBitmap(displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.ARGB_8888);
+        mCanvas.setBitmap(mBitmap);
         invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.save();
-       // mCanvas.drawColor(backgroundColor);
+        // ps.drawColor(backgroundColor);
 
         for (FingerPath fp : paths) {
             mPaint.setColor(fp.color);
@@ -134,8 +153,11 @@ public class PaintView extends View {
         mY = y;
     }
 
-    public void setColorPaint(int color){
-        mPaint.setColor(color);
+    public void setColorPaint(int color) {
+        for (FingerPath fp : paths) {
+            mPaint.setColor(color);
+            mCanvas.drawPath(fp.path, mPaint);
+        }
     }
 
     private void touchMove(float x, float y) {
@@ -158,16 +180,16 @@ public class PaintView extends View {
         float x = event.getX();
         float y = event.getY();
 
-        switch(event.getAction()) {
-            case MotionEvent.ACTION_DOWN :
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
                 touchStart(x, y);
                 invalidate();
                 break;
-            case MotionEvent.ACTION_MOVE :
+            case MotionEvent.ACTION_MOVE:
                 touchMove(x, y);
                 invalidate();
                 break;
-            case MotionEvent.ACTION_UP :
+            case MotionEvent.ACTION_UP:
                 touchUp();
                 invalidate();
                 break;
