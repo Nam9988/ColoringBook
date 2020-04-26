@@ -1,18 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/ln_left"
+        android:layout_width="60dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_photo"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/img_select_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/img_select_photo"
+            tools:listitem="@layout/item_color"
+            android:id="@+id/rv_color"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/frm_paint"
+        android:layout_toEndOf="@+id/ln_left"
+        android:layout_toStartOf="@+id/ln_control"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:src="@drawable/img_demo"
+            android:id="@+id/img_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.example.dd.PaintView
+            android:id="@+id/paint_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_control"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp">
+        <ImageView
+            android:id="@+id/btn_paint"
+            android:src="@drawable/ic_paint"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/btn_clear"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_eraser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"/>
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/btn_undo"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_undo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
