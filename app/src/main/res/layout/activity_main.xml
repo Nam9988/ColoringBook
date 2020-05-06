@@ -37,9 +37,14 @@
         android:layout_toEndOf="@+id/ln_left"
         android:layout_toStartOf="@+id/ln_control"
         android:layout_width="match_parent"
-        android:padding="16dp"
+        android:padding="10dp"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imbg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light" />
         <ImageView
             android:src="@drawable/img_demo"
             android:id="@+id/img_background"
@@ -84,6 +89,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/btn_save"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_undo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"/>
+
 
     </LinearLayout>
 
