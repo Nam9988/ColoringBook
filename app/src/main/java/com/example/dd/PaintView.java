@@ -86,15 +86,15 @@ public class PaintView extends View {
         blur = false;
     }
 
-    public void emboss() {
-        emboss = true;
-        blur = false;
-    }
-
-    public void blur() {
-        emboss = false;
-        blur = true;
-    }
+//    public void emboss() {
+//        emboss = true;
+//        blur = false;
+//    }
+//
+//    public void blur() {
+//        emboss = false;
+//        blur = true;
+//    }
 
     public void clear() {
         backgroundColor = DEFAULT_BG_COLOR;
@@ -129,10 +129,10 @@ public class PaintView extends View {
             mPaint.setStrokeWidth(fp.strokeWidth);
             mPaint.setMaskFilter(null);
 
-            if (fp.emboss)
-                mPaint.setMaskFilter(mEmboss);
-            else if (fp.blur)
-                mPaint.setMaskFilter(mBlur);
+//            if (fp.emboss)
+//                mPaint.setMaskFilter(mEmboss);
+//            else if (fp.blur)
+//                mPaint.setMaskFilter(mBlur);
 
             mCanvas.drawPath(fp.path, mPaint);
 
@@ -153,12 +153,6 @@ public class PaintView extends View {
         mY = y;
     }
 
-    public void setColorPaint(int color) {
-        for (FingerPath fp : paths) {
-            mPaint.setColor(color);
-            mCanvas.drawPath(fp.path, mPaint);
-        }
-    }
 
     private void touchMove(float x, float y) {
         float dx = Math.abs(x - mX);
@@ -196,5 +190,11 @@ public class PaintView extends View {
         }
 
         return true;
+    }
+    public void setColorPaint(int color) {
+        currentColor=color;
+    }
+    public void resize(int size) {
+        strokeWidth=BRUSH_SIZE*(size+1);
     }
 }

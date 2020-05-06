@@ -184,5 +184,6 @@ public class FileUtil {
     public static boolean isNewGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.contentprovider".equals(uri.getAuthority());
     }
+
 }
 

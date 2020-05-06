@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +15,19 @@ import java.util.List;
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
     List<Integer> colors;
     LayoutInflater inflater;
-    OnColorSelected onColorSelected;
 
-    public ColorAdapter(Context context,List<Integer> colors,OnColorSelected onColorSelected) {
-        inflater = LayoutInflater.from(context);
-        this.colors = colors;
+    public void setOnColorSelected(OnColorSelected onColorSelected) {
         this.onColorSelected = onColorSelected;
     }
+
+    OnColorSelected onColorSelected;
+
+    public ColorAdapter(Context context,List<Integer> colors) {
+        inflater = LayoutInflater.from(context);
+        this.colors = colors;
+
+    }
+
 
     @NonNull
     @Override
@@ -32,7 +39,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final int color = colors.get(position);
         holder.imgColor.setBackgroundColor(color);
-        holder.imgColor.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onColorSelected.onSelected(color);
