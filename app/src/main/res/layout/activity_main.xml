@@ -68,9 +68,19 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
         android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/select"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#FF0000"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
         <ImageView
             android:id="@+id/btn_paint"
-            android:src="@drawable/ic_paint"
+            android:src="@drawable/ic_paint0"
+            android:layout_marginTop="32dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"/>
@@ -92,7 +102,7 @@
         <ImageView
             android:id="@+id/btn_save"
             android:layout_marginTop="32dp"
-            android:src="@drawable/ic_undo"
+            android:src="@drawable/ic_save"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"/>

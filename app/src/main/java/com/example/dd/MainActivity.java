@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnClear;
     private ImageView btnUndo;
     private ImageView btnSave;
+    private  ImageView select;
     private FrameLayout fmLayout;
 
     private ColorAdapter colorAdapter;
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnUndo = findViewById(R.id.btn_undo);
         btnSave= findViewById(R.id.btn_save);
         fmLayout=findViewById(R.id.frm_paint);
+        select=findViewById(R.id.select);
         btnPaint.setOnClickListener(this);
         btnClear.setOnClickListener(this);
         btnUndo.setOnClickListener(this);
@@ -280,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSelected(int color) {
              //   Toast.makeText(MainActivity.this,String.valueOf(color),Toast.LENGTH_LONG).show();
                 paintView.setColorPaint(color);
+                select.setBackgroundColor(color);
             }
         });
         rvColor.setLayoutManager(llm);
@@ -299,7 +303,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 size++;
                 size=size%3;
                 paintView.resize(size);
-                Toast.makeText(MainActivity.this,String.valueOf(size),Toast.LENGTH_LONG).show();
+               // Toast.makeText(MainActivity.this,String.valueOf(size),Toast.LENGTH_LONG).show();
+                String ff= "ic_paint"+String.valueOf(size);
+
+                btnPaint.setImageResource(getResources().getIdentifier("com.example.dd:drawable/" + ff, null, null));
+
                 break;
             case R.id.btn_clear:
                 paintView.clear();
