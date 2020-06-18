@@ -31,27 +31,29 @@
     </RelativeLayout>
 
 
-
     <FrameLayout
         android:id="@+id/frm_paint"
-        android:layout_toEndOf="@+id/ln_left"
-        android:layout_toStartOf="@+id/ln_control"
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/ln_control"
+        android:layout_toEndOf="@+id/ln_left"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imbg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/background_light" />
+
         <ImageView
-            android:src="@drawable/img_demo"
             android:id="@+id/img_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:src="@drawable/img_demo" />
 
         <com.example.dd.PaintView
+
             android:id="@+id/paint_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -106,6 +108,13 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btnmode"
+            android:layout_marginTop="32dp"
+            android:text="Mode"
+            android:layout_weight="1"/> />
 
 
     </LinearLayout>

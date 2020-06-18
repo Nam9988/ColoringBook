@@ -15,9 +15,11 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 import com.bumptech.glide.Glide;
 
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnSave;
     private  ImageView select;
     private FrameLayout fmLayout;
+    private Button mode;
+    int DefaultColor;
+
 
     private ColorAdapter colorAdapter;
     private RecyclerView rvColor;
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Bitmap rsbm;
     String TAG="OPCV";
     private int size=0;
+
 
     private static final int GET_FILE_REQUEST_CODE = 101;
     private static final int REQUEST_PERMISSION = 102;
@@ -74,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 //        mImgRootPhoto = (ImageView) findViewById(R.id.img_root_photo);
 //        mImgResultPhoto = (ImageView) findViewById(R.id.img_result_photo);
         paintView = findViewById(R.id.paint_view);
@@ -83,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         paintView.init(metrics);
         paintView.normal();
         init();
+        DefaultColor=paintView.DEFAULT_COLOR;
         initRecyclerView();
 
     }
@@ -186,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             bm = BitmapFactory.decodeFile(imagePath);
         }
         // Fill root photo into image view
-        paintView.clear();
+            paintView.clear();
 
       //  bm = BitmapFactory.decodeFile(imagePath);
 
@@ -200,9 +210,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       //  canny.detectEdges(bm);
       //  Bitmap rsbm =detectEdges(bm);
 
-        Glide.with(this)
-                .load(rsbm).fitCenter()
-                .into(imgBackground);
+       // Glide.with(this)
+        //        .load(rsbm).fitCenter()
+         //       .into(imgBackground);
+        paintView.setbm(rsbm);
+       // paintView.init();
     }
 
 
@@ -223,8 +235,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bitmap resultBitmap = Bitmap.createBitmap(edges.cols(), edges.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(edges, resultBitmap);
        // BitmapHelper.showBitmap(this, resultBitmap, detectEdgesImageView);
-        Bitmap resultBitmap1 = Bitmap.createBitmap(edges.cols(), edges.rows(), Bitmap.Config.ARGB_8888);
-        Bitmap resultBitmap2 = Bitmap.createBitmap(edges.cols(), edges.rows(), Bitmap.Config.ARGB_8888);
+        //  Bitmap resultBitmap1 = Bitmap.createBitmap(edges.cols(), edges.rows(), Bitmap.Config.ARGB_8888);
+       // Bitmap resultBitmap2 = Bitmap.createBitmap(edges.cols(), edges.rows(), Bitmap.Config.ARGB_8888);
 
 
 
@@ -266,12 +278,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSave= findViewById(R.id.btn_save);
         fmLayout=findViewById(R.id.frm_paint);
         select=findViewById(R.id.select);
+        mode =(Button) findViewById(R.id.btnmode);
         btnPaint.setOnClickListener(this);
         btnClear.setOnClickListener(this);
         btnUndo.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         rvColor = findViewById(R.id.rv_color);
-
+        mode.setOnClickListener(this);
+        select.setOnClickListener(this);
     }
 
     private void initRecyclerView() {
@@ -294,7 +308,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()) {
-
+            case R.id.select:
+                OpenColorPickerDialog(false);
+                break;
+            case R.id.btnmode:
+                paintView.modeFlood();
+                Toast.makeText(MainActivity.this,String.valueOf(paintView.getis()),Toast.LENGTH_SHORT).show();
+                break;
             case R.id.btn_save:
                 saveFrameLayout(fmLayout);
                 //Toast.makeText(MainActivity.this,"Click",Toast.LENGTH_LONG).show();
@@ -339,6 +359,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
+    //Save
+
     public  void saveFrameLayout(FrameLayout frameLayout) {
         frameLayout.setDrawingCacheEnabled(true);
         frameLayout.buildDrawingCache();
@@ -380,6 +402,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //Color picker
+
+    private void OpenColorPickerDialog(boolean AlphaSupport) {
+
+        AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(MainActivity.this, DefaultColor, AlphaSupport, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onOk(AmbilWarnaDialog ambilWarnaDialog, int color) {
+
+                DefaultColor = color;
+
+                paintView.setColorPaint(color);
+                select.setBackgroundColor(color);
+            }
+
+            @Override
+            public void onCancel(AmbilWarnaDialog ambilWarnaDialog) {
+
+                Toast.makeText(MainActivity.this, "Color Picker Closed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ambilWarnaDialog.show();
+
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
