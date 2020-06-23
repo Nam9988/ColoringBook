@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mnu_paint"
+        android:icon="@drawable/ic_paint"
+        android:title="Vẽ tranh" />
+
+    <item
+        android:id="@+id/mnu_news"
+        android:icon="@drawable/ic_new"
+        android:title="Bảng tin" />
+
+    <item
+        android:id="@+id/mnu_account"
+        android:icon="@drawable/ic_account"
+        android:title="Tài khoản" />
+</menu>
