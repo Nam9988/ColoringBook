@@ -115,7 +115,7 @@ public class PaintView extends View {
 
         //ghep
         mBitmap = Bitmap.createBitmap(displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.ARGB_8888);
-        mBitmap.eraseColor(Color.BLUE);
+        mBitmap.eraseColor(Color.WHITE);
         mBitmap1=mergeToPin(mBitmap,mBitmap1);
 
 

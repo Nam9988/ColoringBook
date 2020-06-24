@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int DefaultColor;
 
 
+
     private ColorAdapter colorAdapter;
     private RecyclerView rvColor;
     private List<Integer> colors;
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode != GET_FILE_REQUEST_CODE || resultCode != RESULT_OK) {
             super.onActivityResult(requestCode, resultCode, data);

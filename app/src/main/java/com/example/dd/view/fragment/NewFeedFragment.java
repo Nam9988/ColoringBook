@@ -40,7 +40,7 @@ public class NewFeedFragment extends Fragment {
 
     @Override
     public void onResume() {
-        ContainerActivity.getInstance().tbTitle.setText("Bảng tin");
+        ContainerActivity.getInstance().tbTitle.setText("News Feed");
         super.onResume();
     }
 }

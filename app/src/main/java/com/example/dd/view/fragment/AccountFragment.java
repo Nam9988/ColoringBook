@@ -20,7 +20,7 @@ public class AccountFragment extends Fragment {
 
     @Override
     public void onResume() {
-        ContainerActivity.getInstance().tbTitle.setText("Tài khoản");
+        ContainerActivity.getInstance().tbTitle.setText("Account");
         super.onResume();
     }
 }

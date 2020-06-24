@@ -3,15 +3,15 @@
     <item
         android:id="@+id/mnu_paint"
         android:icon="@drawable/ic_paint"
-        android:title="Vẽ tranh" />
+        android:title="Paint" />
 
     <item
         android:id="@+id/mnu_news"
         android:icon="@drawable/ic_new"
-        android:title="Bảng tin" />
+        android:title="News Feed" />
 
     <item
         android:id="@+id/mnu_account"
         android:icon="@drawable/ic_account"
-        android:title="Tài khoản" />
+        android:title="Account" />
 </menu>

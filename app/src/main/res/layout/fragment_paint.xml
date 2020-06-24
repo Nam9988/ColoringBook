@@ -166,9 +166,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="8.5">
 
-            <androidx.cardview.widget.CardView
+            <FrameLayout
+                android:id="@+id/frm_paint1"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -177,18 +178,41 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/img_photo"/>
+                <com.example.dd.PaintView
 
-            </androidx.cardview.widget.CardView>
+                    android:id="@+id/paint_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="1.5">
+            <ImageView
+                android:id="@+id/mode1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="20dp"
+                />
+            <ImageView
+                android:id="@+id/color"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                />
+            <SeekBar
+                android:id="@+id/size"
+                android:layout_width="190dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                />
+
+
 
         </LinearLayout>
 
