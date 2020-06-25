@@ -171,6 +171,25 @@ public class PaintFragment extends Fragment  {
 //        displayMetric.widthPixels=fm.getWidth();
         paintView.init(displayMetric);
 
+        size.setMax(100);
+        size.setProgress(25);
+        size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int i=size.getProgress();
+                paintView.resize(i-25);
+            }
+        });
         DefaultColor=paintView.DEFAULT_COLOR;
         return view;
 

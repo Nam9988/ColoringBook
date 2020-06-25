@@ -22,7 +22,7 @@ import androidx.annotation.Nullable;
 
 public class PaintView extends View {
 
-    public static int BRUSH_SIZE = 20;
+    public static int BRUSH_SIZE = 26;
     public static final int DEFAULT_COLOR = Color.RED;
     public static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static final float TOUCH_TOLERANCE = 4;
@@ -288,7 +288,7 @@ public class PaintView extends View {
         currentColor=color;
     }
     public void resize(int size) {
-        strokeWidth=BRUSH_SIZE*(size+1);
+        strokeWidth=BRUSH_SIZE+size+1;
     }
     public void modeFlood() {
         isFlood=(isFlood+1)%2;

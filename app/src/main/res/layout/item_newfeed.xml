@@ -16,16 +16,7 @@
             android:layout_height="@dimen/_36sdp"
             android:src="@drawable/img_demo" />
 
-        <CheckBox
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:checked="true"
-            android:id="@+id/txt_like"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/bg_like"/>
+
 
         <LinearLayout
             android:layout_centerVertical="true"
@@ -76,6 +67,17 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp" />
+    <CheckBox
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:checked="true"
+        android:id="@+id/txt_like"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_margintop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/bg_like"/>
 
     <View
         android:layout_marginTop="@dimen/_8sdp"
