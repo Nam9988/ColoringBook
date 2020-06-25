@@ -1,30 +1,48 @@
 package com.example.dd.view.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dd.R;
+import com.example.dd.view.fragment.CommentFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewfeedsAdapter extends RecyclerView.Adapter<NewfeedsAdapter.ViewHolder> {
+    FragmentActivity activity;
+
+    public NewfeedsAdapter(FragmentActivity activity) {
+        this.activity = activity;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_newfeed,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_newfeed, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommentFragment fragment = new CommentFragment();
+                fragment.show(activity.getSupportFragmentManager(), "CommentFragment");
+            }
+        });
     }
 
     @Override
@@ -33,20 +51,23 @@ public class NewfeedsAdapter extends RecyclerView.Adapter<NewfeedsAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName;
-        TextView txtTime;
-        TextView txtContent;
+        @BindView(R.id.img_avatar)
         CircleImageView imgAvatar;
+        @BindView(R.id.txt_name)
+        TextView txtName;
+        @BindView(R.id.txt_time)
+        TextView txtTime;
+        @BindView(R.id.tct_content)
+        TextView tctContent;
+        @BindView(R.id.img_content)
         ImageView imgContent;
-        CheckBox cbLike;
+        @BindView(R.id.txt_like)
+        CheckBox txtLike;
+        @BindView(R.id.btn_comment)
+        LinearLayout btnComment;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtName = itemView.findViewById(R.id.txt_name);
-            txtTime = itemView.findViewById(R.id.txt_time);
-            txtContent = itemView.findViewById(R.id.tct_content);
-            imgAvatar = itemView.findViewById(R.id.img_avatar);
-            imgContent = itemView.findViewById(R.id.img_content);
-            cbLike = itemView.findViewById(R.id.txt_like);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -33,7 +33,7 @@ public class NewFeedFragment extends Fragment {
 
     private void initView(View view) {
         rvNewFeed = view.findViewById(R.id.rv_layout);
-        NewfeedsAdapter adapter = new NewfeedsAdapter();
+        NewfeedsAdapter adapter = new NewfeedsAdapter(getActivity());
         rvNewFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvNewFeed.setAdapter(adapter);
     }
@@ -41,6 +41,7 @@ public class NewFeedFragment extends Fragment {
     @Override
     public void onResume() {
         ContainerActivity.getInstance().tbTitle.setText("News Feed");
+        ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.GONE);
         super.onResume();
     }
 }

@@ -1,7 +1,6 @@
 package com.example.dd.view.fragment;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,13 +24,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import yuku.ambilwarna.AmbilWarnaDialog;
 
 import com.example.dd.FileUtil;
-import com.example.dd.MainActivity;
 import com.example.dd.PaintView;
 import com.example.dd.PermissionUtil;
 import com.example.dd.R;
@@ -53,6 +46,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Hashtable;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -91,8 +89,8 @@ public class PaintFragment extends Fragment  {
     private Bitmap bm;
     private Bitmap rsbm;
     String TAG="OPCV";
-    private static final int GET_FILE_REQUEST_CODE = 101;
-    private static final int REQUEST_PERMISSION = 102;
+    public static final int GET_FILE_REQUEST_CODE = 101;
+    public static final int REQUEST_PERMISSION = 102;
     private String mCameraPhotoPath;
 
 
@@ -129,7 +127,7 @@ public class PaintFragment extends Fragment  {
     }
     @OnClick(R.id.btn_share)
     public void share(){
-    checkPermissionOS6();
+
     }
     @OnClick(R.id.mode1)
     public void ChangeMode(){
@@ -198,6 +196,7 @@ public class PaintFragment extends Fragment  {
     @Override
     public void onResume() {
         ContainerActivity.getInstance().tbTitle.setText("Paint");
+        ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.VISIBLE);
         super.onResume();
     }
 
@@ -267,53 +266,6 @@ public class PaintFragment extends Fragment  {
         });
         ambilWarnaDialog.show();
 
-    }
-
-
-
-    private void checkPermissionOS6() {
-        if (PermissionUtil.isCameraPermissionOn(getContext())
-                && PermissionUtil.isReadExternalPermissionOn(getContext())
-                && PermissionUtil.isWriteExternalPermissionOn(getContext())) {
-            getPhoto();
-            return;
-        }
-        String[] permissions = {
-                Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_PERMISSION);
-    }
-
-    private void getPhoto() {
-        // Camera
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File photoFile = null;
-        try {
-            photoFile = FileUtil.createImageFile(getContext());
-            mCameraPhotoPath = "file:" + photoFile.getAbsolutePath();
-        } catch (IOException e) {
-            mCameraPhotoPath = null;
-        }
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-
-        // Gallery
-        Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
-        gallery.addCategory(Intent.CATEGORY_OPENABLE);
-        gallery.setType("image/*");
-
-        Intent[] intents;
-        if (cameraIntent != null && mCameraPhotoPath != null) {
-            intents = new Intent[]{cameraIntent};
-        } else {
-            intents = new Intent[0];
-        }
-
-        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-        chooserIntent.putExtra(Intent.EXTRA_INTENT, gallery);
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
-
-        startActivityForResult(chooserIntent, GET_FILE_REQUEST_CODE);
     }
 
     @Override

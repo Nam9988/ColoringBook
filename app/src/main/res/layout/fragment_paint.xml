@@ -192,28 +192,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:layout_weight="1.5">
             <ImageView
                 android:id="@+id/mode1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@android:color/white"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/ic_fill"
                 android:layout_marginLeft="20dp"
                 />
             <ImageView
                 android:id="@+id/color"
-                android:layout_width="80dp"
-                android:background="@android:color/white"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                />
-            <SeekBar
-                android:id="@+id/size"
-                android:layout_width="190dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:src="@drawable/ic_pen"
+                android:layout_marginLeft="@dimen/_16sdp"
                 />
 
+            <SeekBar
+                android:id="@+id/size"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp" />
 
 
         </LinearLayout>
