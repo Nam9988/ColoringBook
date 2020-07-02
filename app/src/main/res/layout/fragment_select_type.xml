@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Chọn"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:padding="@dimen/_4sdp"
+        android:id="@+id/txt_recent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Chọn ảnh có sẵn"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:padding="@dimen/_4sdp"
+        android:id="@+id/txt_galery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:text="Chọn ảnh từ thư viện"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="@dimen/_32sdp"/>
+
+
+</LinearLayout>

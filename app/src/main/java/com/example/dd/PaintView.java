@@ -31,8 +31,8 @@ public class PaintView extends View {
     private Paint mPaint;
     private ArrayList<FingerPath> paths = new ArrayList<>();
     private ArrayList<FingerPath> undoPaths = new ArrayList<>();
-    private ArrayList<Bitmap> bitmaps=new ArrayList<>();
-    private ArrayList<Bitmap> undobitmap=new ArrayList<>();
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
+    private ArrayList<Bitmap> undobitmap = new ArrayList<>();
     private int currentColor;
     private int backgroundColor = DEFAULT_BG_COLOR;
     private int strokeWidth;
@@ -88,38 +88,38 @@ public class PaintView extends View {
 
         currentColor = DEFAULT_COLOR;
         strokeWidth = BRUSH_SIZE;
-        isFlood=0;
+        isFlood = 0;
     }
 
-    public  void setbm(Bitmap bm){
+    public void setbm(Bitmap bm) {
 
 
         ///resize
-        mBitmap1=bm;
-        float bmwidth=bm.getWidth();
-        float bmheigh=bm.getHeight();
-        float newwidth=0;
-        float newhight=0;
-      //  mBitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.im);
-        if(bmwidth>displayMetrics.widthPixels){
-            newwidth=(float) displayMetrics.widthPixels;
-            newhight=bmheigh/bmwidth *newwidth;
+        mBitmap1 = bm;
+        float bmwidth = bm.getWidth();
+        float bmheigh = bm.getHeight();
+        float newwidth = 0;
+        float newhight = 0;
+        //  mBitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.im);
+        if (bmwidth > displayMetrics.widthPixels) {
+            newwidth = (float) displayMetrics.widthPixels;
+            newhight = bmheigh / bmwidth * newwidth;
         }
-        if(bmheigh>displayMetrics.heightPixels){
-            newhight=(float) displayMetrics.heightPixels;
-            newwidth=bmwidth/bmheigh*newhight;
+        if (bmheigh > displayMetrics.heightPixels) {
+            newhight = (float) displayMetrics.heightPixels;
+            newwidth = bmwidth / bmheigh * newhight;
         }
-        if(newhight!=0&&newwidth!=0)
-        mBitmap1=Bitmap.createScaledBitmap(mBitmap1, (int)newwidth, (int)newhight, false);
+        if (newhight != 0 && newwidth != 0)
+            mBitmap1 = Bitmap.createScaledBitmap(mBitmap1, (int) newwidth, (int) newhight, false);
 
 
         //ghep
         mBitmap = Bitmap.createBitmap(displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.ARGB_8888);
         mBitmap.eraseColor(Color.WHITE);
-        mBitmap1=mergeToPin(mBitmap,mBitmap1);
+        mBitmap1 = mergeToPin(mBitmap, mBitmap1);
 
 
-        mBitmap=Bitmap.createBitmap(mBitmap1);
+        mBitmap = Bitmap.createBitmap(mBitmap1);
         mCanvas.setBitmap(mBitmap);
         invalidate();
     }
@@ -140,13 +140,13 @@ public class PaintView extends View {
 //    }
 
     public void clear() {
-       // backgroundColor = DEFAULT_BG_COLOR;
-       // mBitmap.eraseColor(Color.TRANSPARENT);
+        // backgroundColor = DEFAULT_BG_COLOR;
+        // mBitmap.eraseColor(Color.TRANSPARENT);
 
 
         mBitmap = Bitmap.createBitmap(displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.ARGB_8888);
 
-        if(mBitmap1!=null) {
+        if (mBitmap1 != null) {
             mBitmap = Bitmap.createBitmap(mBitmap1);
         }
 
@@ -161,26 +161,27 @@ public class PaintView extends View {
 
     public void undo() {
         if (bitmaps.size() > 0) {
-          //  clearDraw();
+            //  clearDraw();
 
             undobitmap.add(bitmaps.remove(bitmaps.size() - 1));
-            if(bitmaps.size()>0){
-                Bitmap temp=Bitmap.createBitmap(bitmaps.get(bitmaps.size()-1));
-            mBitmap=Bitmap.createBitmap(temp);
-            paths.clear();}
-            else
-                mBitmap=Bitmap.createBitmap(mBitmap1);
+            if (bitmaps.size() > 0) {
+                Bitmap temp = Bitmap.createBitmap(bitmaps.get(bitmaps.size() - 1));
+                mBitmap = Bitmap.createBitmap(temp);
+                paths.clear();
+            } else
+                mBitmap = Bitmap.createBitmap(mBitmap1);
             mCanvas.setBitmap(mBitmap);
             paths.clear();
             invalidate();
-            Toast.makeText(getContext(),String.valueOf(bitmaps.size()),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), String.valueOf(bitmaps.size()), Toast.LENGTH_SHORT).show();
         }
     }
-    public void redo(){
+
+    public void redo() {
         if (undobitmap.size() > 0) {
-            Bitmap temp =Bitmap.createBitmap(undobitmap.remove(undobitmap.size()-1));
+            Bitmap temp = Bitmap.createBitmap(undobitmap.remove(undobitmap.size() - 1));
             bitmaps.add(temp);
-            mBitmap=Bitmap.createBitmap(temp);
+            mBitmap = Bitmap.createBitmap(temp);
             mCanvas.setBitmap(mBitmap);
             invalidate();
         }
@@ -196,7 +197,7 @@ public class PaintView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-       // canvas.save();
+        // canvas.save();
         // ps.drawColor(backgroundColor);
         for (FingerPath fp : paths) {
             mPaint.setColor(fp.color);
@@ -210,7 +211,7 @@ public class PaintView extends View {
         }
 
         canvas.drawBitmap(mBitmap, 0, 0, null);
-       // canvas.restore();
+        // canvas.restore();
     }
 
     private void touchStart(float x, float y) {
@@ -247,36 +248,36 @@ public class PaintView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-              if(isFlood==0)
-                  touchStart(x, y);
-              else {
+                if (isFlood == 0)
+                    touchStart(x, y);
+                else {
 
-                  int clr_int = mBitmap.getPixel((int) x, (int) y);
+                    int clr_int = mBitmap.getPixel((int) x, (int) y);
 
-                  QueueLinearFloodFiller f = new QueueLinearFloodFiller(mBitmap, clr_int, currentColor);
-               //   f.setFillColor(mPaint.getColor());
-                  f.setTargetColor(clr_int);
-                  f.setTolerance(10);
-                  mBitmap = Bitmap.createBitmap(f.floodFill((int) x, (int) y)); //fill bitmap, at p1 with p1's color and fill with Color fr
-                  mCanvas.setBitmap(mBitmap);
-              }
+                    QueueLinearFloodFiller f = new QueueLinearFloodFiller(mBitmap, clr_int, currentColor);
+                    //   f.setFillColor(mPaint.getColor());
+                    f.setTargetColor(clr_int);
+                    f.setTolerance(10);
+                    mBitmap = Bitmap.createBitmap(f.floodFill((int) x, (int) y)); //fill bitmap, at p1 with p1's color and fill with Color fr
+                    mCanvas.setBitmap(mBitmap);
+                }
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                    if(isFlood==0){
+                if (isFlood == 0) {
                     touchMove(x, y);
                     invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if(isFlood==0) {
+                if (isFlood == 0) {
                     touchUp();
                 }
                 invalidate();
-                Bitmap temp =Bitmap.createBitmap(mBitmap);
+                Bitmap temp = Bitmap.createBitmap(mBitmap);
                 bitmaps.add(temp);
                 mCanvas.setBitmap(mBitmap);
-                Toast.makeText(getContext(),String.valueOf(paths.size()),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), String.valueOf(paths.size()), Toast.LENGTH_SHORT).show();
                 paths.clear();
                 break;
         }
@@ -285,17 +286,21 @@ public class PaintView extends View {
     }
 
     public void setColorPaint(int color) {
-        currentColor=color;
+        currentColor = color;
     }
+
     public void resize(int size) {
-        strokeWidth=BRUSH_SIZE+size+1;
+        strokeWidth = BRUSH_SIZE + size + 1;
     }
+
     public void modeFlood() {
-        isFlood=(isFlood+1)%2;
+        isFlood = (isFlood + 1) % 2;
     }
-    public int getis(){
-        return  isFlood;
+
+    public int getis() {
+        return isFlood;
     }
+
     public static Bitmap mergeToPin(Bitmap back, Bitmap front) {
         Bitmap result = Bitmap.createBitmap(back.getWidth(), back.getHeight(), back.getConfig());
         Canvas mecanvas = new Canvas(result);

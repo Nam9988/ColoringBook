@@ -20,26 +20,32 @@ import butterknife.ButterKnife;
 public class AccountPhotoAdapter2 extends RecyclerView.Adapter<AccountPhotoAdapter2.ViewHolder> {
     Activity activity;
     List<Integer> res;
+    OnItemSelected onItemSelected;
 
-    public AccountPhotoAdapter2(Activity activity, List<Integer> res) {
+    public AccountPhotoAdapter2(Activity activity,
+                                List<Integer> res,
+                                OnItemSelected onItemSelected) {
         this.activity = activity;
         this.res = res;
+        this.onItemSelected = onItemSelected;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_photo_account, parent, false));
+        return new ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_photo_selected, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(activity).load(res.get(position)).into(holder.imgPhoto);
+        int imgRes = res.get(position);
+        Glide.with(activity).load(imgRes).into(holder.imgPhoto);
+        holder.imgPhoto.setOnClickListener(v -> onItemSelected.onSelected(imgRes));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return res.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,5 +55,9 @@ public class AccountPhotoAdapter2 extends RecyclerView.Adapter<AccountPhotoAdapt
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemSelected{
+        void onSelected(int res);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dd.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -9,9 +10,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dd.R;
+import com.example.dd.UserDTO;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,5 +80,18 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.txt_register)
     void onTxtRegisterClicked() {
+        startActivityForResult(new Intent(this,RegisterActivity.class), 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK){
+            if (data != null) {
+                UserDTO userDTO = (UserDTO) data.getSerializableExtra("user");
+                edtAccount.setText(userDTO.getEmail());
+                edtPassword.setText(userDTO.getPassword());
+            }
+        }
     }
 }

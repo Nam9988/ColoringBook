@@ -17,12 +17,16 @@ import com.example.dd.view.adapter.NewfeedsAdapter;
 
 public class NewFeedFragment extends Fragment {
     private RecyclerView rvNewFeed;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_feed, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_new_feed, container, false);
+        }
+        return view;
     }
 
     @Override

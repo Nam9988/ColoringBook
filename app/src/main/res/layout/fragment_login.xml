@@ -162,5 +162,5 @@
         android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_28sdp"/>
+        android:layout_marginBottom="@dimen/_32sdp"/>
 </RelativeLayout>

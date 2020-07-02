@@ -29,14 +29,16 @@ public class AccountFragment extends Fragment {
     Button btnEdit;
     @BindView(R.id.rv_photo)
     RecyclerView rvPhoto;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
-        ButterKnife.bind(this,view);
-        initRecyclerView();
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_account, container, false);
+            ButterKnife.bind(this, view);
+            initRecyclerView();
+        }
         return view;
     }
 

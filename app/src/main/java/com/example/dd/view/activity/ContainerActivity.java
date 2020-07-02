@@ -5,12 +5,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -23,16 +20,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.dd.FileUtil;
 import com.example.dd.PermissionUtil;
 import com.example.dd.R;
 import com.example.dd.view.fragment.AccountFragment;
 import com.example.dd.view.fragment.NewFeedFragment;
 import com.example.dd.view.fragment.PaintFragment;
+import com.example.dd.view.fragment.SelectPhotoFragment;
+import com.example.dd.view.fragment.SelectTypePhotoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.io.File;
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,7 +80,25 @@ public class ContainerActivity extends AppCompatActivity {
             }
         });
 
-        btnChangePhoto.setOnClickListener(v -> checkPermissionOS6());
+        btnChangePhoto.setOnClickListener(v ->{
+            showSelectType();
+        });
+    }
+
+    private void showSelectType() {
+        SelectTypePhotoFragment fragment = new SelectTypePhotoFragment(new SelectTypePhotoFragment.OnTypeSelected() {
+            @Override
+            public void onTypeClicked(int type) {
+                if (type == 1){
+                    if (paintFragment != null){
+                        paintFragment.openSelectPhotoFragment();
+                    }
+                }else {
+                    checkPermissionOS6();
+                }
+            }
+        });
+        fragment.show(getSupportFragmentManager(), SelectTypePhotoFragment.class.getName());
     }
 
     private void getPhoto() {
