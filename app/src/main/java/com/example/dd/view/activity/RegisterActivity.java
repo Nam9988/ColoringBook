@@ -12,8 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dd.R;
-import com.example.dd.UserDTO;
+import com.example.dd.model.UserDTO;
 import com.example.dd.util.TextUtil;
+import com.example.dd.util.ValidateUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,12 +72,19 @@ public class RegisterActivity extends AppCompatActivity {
         if (email.length() == 0) {
             Toast.makeText(this, "Vui lòng nhập địa chỉ email!", Toast.LENGTH_SHORT).show();
             return false;
+        }else if (!ValidateUtil.isEmail(email)){
+            Toast.makeText(this, "Email nhập không chính xác!", Toast.LENGTH_SHORT).show();
+            return false;
         }
 
         if (password.length() == 0) {
             Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
             return false;
         } else {
+            if (!ValidateUtil.checkPassword(password)){
+                Toast.makeText(this, "Mật khẩu chưa đủ mạnh!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
             if (!password.equals(confirmPassword)) {
                 Toast.makeText(this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                 return false;

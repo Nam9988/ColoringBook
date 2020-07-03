@@ -1,4 +1,4 @@
-package com.example.dd;
+package com.example.dd.model;
 
 import java.io.Serializable;
 

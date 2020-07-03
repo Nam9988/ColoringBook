@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dd.R;
-import com.example.dd.UserDTO;
+import com.example.dd.model.UserDTO;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
