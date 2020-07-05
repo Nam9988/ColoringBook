@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtRegister;
 
     private boolean isShowPassword = false;
+    private UserDTO userDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == Activity.RESULT_OK){
             if (data != null) {
-                UserDTO userDTO = (UserDTO) data.getSerializableExtra("user");
+                userDTO = (UserDTO) data.getSerializableExtra("user");
                 edtAccount.setText(userDTO.getEmail());
                 edtPassword.setText(userDTO.getPassword());
             }

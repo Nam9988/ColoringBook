@@ -57,5 +57,12 @@ public class AccountFragment extends Fragment {
 
     @OnClick(R.id.btn_edit)
     public void onViewClicked() {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,new EditAccountFragment())
+                .addToBackStack(null)
+                .commit();
     }
+
+
 }

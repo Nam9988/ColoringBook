@@ -1,12 +1,16 @@
 package com.example.dd.view.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,9 @@ import com.example.dd.R;
 import com.example.dd.model.UserDTO;
 import com.example.dd.util.TextUtil;
 import com.example.dd.util.ValidateUtil;
+
+import java.util.Calendar;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
     EditText edtConfirmPassword;
     @BindView(R.id.btn_register)
     Button btnRegister;
+    @BindView(R.id.rd_male)
+    RadioButton rdMale;
+    @BindView(R.id.rd_female)
+    RadioButton rdFemale;
+    @BindView(R.id.edt_dob)
+    TextView edtDob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +66,24 @@ public class RegisterActivity extends AppCompatActivity {
         String email = TextUtil.getValue(edtEmail);
         String password = TextUtil.getValue(edtPassword);
         String name = TextUtil.getValue(edtName);
+        String dob = TextUtil.getValue(edtDob);
+        String gender;
+        if (rdMale.isChecked()){
+            gender = "male";
+        }else {
+            gender = "female";
+        }
         String confirmPassword = TextUtil.getValue(edtConfirmPassword);
-        if (validateSubmit(name, email, password, confirmPassword)) {
-            UserDTO userDTO = new UserDTO(name, email, password);
+        if (validateSubmit(name, email,password, dob, confirmPassword)) {
+            UserDTO userDTO = new UserDTO(name, email, password,gender,"",dob);
             Intent intent = new Intent();
             intent.putExtra("user", userDTO);
-            setResult(Activity.RESULT_OK,intent);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         }
     }
 
-    private boolean validateSubmit(String name, String email, String password, String confirmPassword) {
+    private boolean validateSubmit(String name, String email, String password,String dob, String confirmPassword) {
         if (name.length() == 0) {
             Toast.makeText(this, "Vui lòng nhập tên!", Toast.LENGTH_SHORT).show();
             return false;
@@ -72,16 +92,19 @@ public class RegisterActivity extends AppCompatActivity {
         if (email.length() == 0) {
             Toast.makeText(this, "Vui lòng nhập địa chỉ email!", Toast.LENGTH_SHORT).show();
             return false;
-        }else if (!ValidateUtil.isEmail(email)){
+        } else if (!ValidateUtil.isEmail(email)) {
             Toast.makeText(this, "Email nhập không chính xác!", Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        if (dob.length() == 0) {
+            Toast.makeText(this, "Vui lòng nhập ngày sinh!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (password.length() == 0) {
             Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            if (!ValidateUtil.checkPassword(password)){
+            if (!ValidateUtil.checkPassword(password)) {
                 Toast.makeText(this, "Mật khẩu chưa đủ mạnh!", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -91,5 +114,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void selectDob() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog;
+        datePickerDialog = new DatePickerDialog(
+                this,
+                (datePicker, year1, month1, day1) ->
+                        edtDob.setText(TextUtil.generateDay(day1, month1+1,year1)), year, month, day);
+        datePickerDialog.show();
+    }
+
+    @OnClick(R.id.edt_dob)
+    public void onViewClicked() {
+        selectDob();
     }
 }

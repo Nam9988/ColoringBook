@@ -18,6 +18,10 @@ public class TextUtil {
         return editText.getText().toString().trim();
     }
 
+    public static String getValue(TextView editText) {
+        return editText.getText().toString().trim();
+    }
+
     public static String getValue(TextInputEditText textInputEditText) {
         return Objects.requireNonNull(textInputEditText.getText()).toString().trim();
     }
@@ -48,17 +52,33 @@ public class TextUtil {
         return result;
     }
 
-    public static String displayDouble(double value){
-        String sValue =  value + "";
-        sValue = sValue.replace(".",",");
-        if (!sValue.contains(",")){
+    public static String displayDouble(double value) {
+        String sValue = value + "";
+        sValue = sValue.replace(".", ",");
+        if (!sValue.contains(",")) {
             return sValue;
         }
         String[] arr = sValue.split(",");
-        if (Integer.parseInt(arr[1]) == 0){
+        if (Integer.parseInt(arr[1]) == 0) {
             return arr[0];
         }
-        return sValue.replace(",",".");
+        return sValue.replace(",", ".");
+    }
+
+    public static String generateDay(int day, int month, int year) {
+        String sDay = day + "";
+        if (day < 10) {
+            sDay = "0" + sDay;
+        }
+
+        String sMonth = month + "";
+        if (month < 10) {
+            sMonth = "0" + sMonth;
+        }
+
+        String sYear = year + "";
+
+        return sDay + "/" + sMonth + "/" + sYear;
     }
 }
 

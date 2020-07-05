@@ -22,6 +22,7 @@ import android.widget.Toast;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 import com.bumptech.glide.Glide;
+import com.example.dd.model.UserDTO;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private String mCameraPhotoPath;
+
+    public UserDTO userDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

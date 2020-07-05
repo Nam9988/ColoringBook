@@ -1,26 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_16sdp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avt"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@drawable/img_demo" />
+
+    </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/btn_change_avt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="horizontal"
+        android:padding="@dimen/_4sdp">
+
+        <ImageView
+            android:id="@+id/img_change_avt"
+
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_change_avt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Chỉnh sửa"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_11ssp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_16sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/_24sdp"
-            android:text="Tạo tài khoản"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_20ssp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,8 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:text="Nam"
-                android:checked="true"
                 android:buttonTint="@android:color/white"
+                android:checked="true"
                 android:textColor="@android:color/white" />
 
             <RadioButton
@@ -93,8 +126,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:buttonTint="@android:color/white"
                 android:text="Nữ"
+                android:buttonTint="@android:color/white"
                 android:textColor="@android:color/white" />
         </RadioGroup>
 
@@ -117,6 +150,7 @@
                 android:layout_toStartOf="@id/btn_calendar"
                 android:background="@null"
                 android:hint="Nhập ngày sinh"
+                android:clickable="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/_11ssp" />
 
@@ -131,70 +165,14 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edt_login"
-            android:padding="@dimen/_8sdp">
-
-
-            <EditText
-                android:id="@+id/edt_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_toStartOf="@id/btn_visible"
-                android:background="@null"
-                android:hint="Nhập mật khẩu"
-                android:inputType="textPassword"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/_11ssp" />
-
-            <ImageView
-                android:id="@+id/btn_visible"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:padding="@dimen/_2sdp"
-                android:src="@drawable/ic_show_password"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edt_login"
-            android:padding="@dimen/_8sdp">
-
-
-            <EditText
-                android:id="@+id/edt_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@null"
-                android:hint="Nhập lại mật khẩu"
-                android:inputType="textPassword"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/_11ssp" />
-
-        </RelativeLayout>
-
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/bg_btn_login"
-            android:text="ĐĂNG KÝ"
+            android:text="Xong"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
