@@ -36,6 +36,13 @@ public class NewfeedsAdapter extends RecyclerView.Adapter<NewfeedsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (position == 1){
+            holder.txtName.setText("Nam");
+            holder.imgAvatar.setImageResource(R.drawable.messi);
+            holder.imgContent.setImageResource(R.drawable.demo2);
+        }else {
+            holder.imgContent.setImageResource(R.drawable.demo1);
+        }
         holder.btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +54,7 @@ public class NewfeedsAdapter extends RecyclerView.Adapter<NewfeedsAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

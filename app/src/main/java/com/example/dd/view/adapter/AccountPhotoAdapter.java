@@ -32,12 +32,12 @@ public class AccountPhotoAdapter extends RecyclerView.Adapter<AccountPhotoAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.imgPhoto.setImageResource(R.drawable.demo2);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 2;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

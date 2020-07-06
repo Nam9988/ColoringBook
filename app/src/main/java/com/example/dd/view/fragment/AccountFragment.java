@@ -52,6 +52,7 @@ public class AccountFragment extends Fragment {
     public void onResume() {
         ContainerActivity.getInstance().tbTitle.setText("Tài khoản");
         ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.GONE);
+        ContainerActivity.getInstance().btnLogout.setVisibility(View.VISIBLE);
         super.onResume();
     }
 

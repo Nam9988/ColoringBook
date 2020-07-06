@@ -44,6 +44,7 @@ public class ContainerActivity extends AppCompatActivity {
     public ImageView btnChangePhoto;
     @BindView(R.id.tb)
     public RelativeLayout tb;
+    public TextView btnLogout;
     private PaintFragment paintFragment;
 
     public static ContainerActivity getInstance() {
@@ -60,6 +61,7 @@ public class ContainerActivity extends AppCompatActivity {
         paintFragment = new PaintFragment();
         loadFragment(paintFragment);
         bottomNav = findViewById(R.id.bottom_nav);
+        btnLogout = findViewById(R.id.btn_logout);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -86,6 +86,7 @@ public class SelectPhotoFragment extends Fragment implements AccountPhotoAdapter
 
     @Override
     public void onResume() {
+        ContainerActivity.getInstance().btnLogout.setVisibility(View.GONE);
         ContainerActivity.getInstance().tbTitle.setText("Chọn ảnh");
         ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.GONE);
         super.onResume();

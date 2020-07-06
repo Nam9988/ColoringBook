@@ -15,7 +15,7 @@
             android:id="@+id/img_avatar"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
-            android:src="@drawable/img_demo" />
+            android:src="@drawable/ronaldo" />
 
 
 

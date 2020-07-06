@@ -204,6 +204,7 @@ public class PaintFragment extends Fragment {
 
     @Override
     public void onResume() {
+        ContainerActivity.getInstance().btnLogout.setVisibility(View.GONE);
         ContainerActivity.getInstance().tbTitle.setText("Paint");
         ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.VISIBLE);
         super.onResume();

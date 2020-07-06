@@ -44,6 +44,7 @@ public class NewFeedFragment extends Fragment {
 
     @Override
     public void onResume() {
+        ContainerActivity.getInstance().btnLogout.setVisibility(View.GONE);
         ContainerActivity.getInstance().tbTitle.setText("News Feed");
         ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.GONE);
         super.onResume();

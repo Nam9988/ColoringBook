@@ -158,6 +158,7 @@ public class EditAccountFragment extends BottomSheetDialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+        ContainerActivity.getInstance().btnLogout.setVisibility(View.GONE);
         ContainerActivity.getInstance().tbTitle.setText("Chỉnh sửa");
         ContainerActivity.getInstance().btnChangePhoto.setVisibility(View.GONE);
     }
