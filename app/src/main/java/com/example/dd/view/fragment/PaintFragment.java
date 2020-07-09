@@ -133,7 +133,11 @@ public class PaintFragment extends Fragment {
 
     @OnClick(R.id.btn_share)
     public void share() {
-
+        ShareFragment shareFragment = new ShareFragment(content -> {
+            // TODO
+            // Viết sự kiện share
+        });
+        shareFragment.show(requireFragmentManager(), ShareFragment.class.getName());
     }
 
     @OnClick(R.id.mode1)
